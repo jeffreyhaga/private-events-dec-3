@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @event %>
+
+<p>Hosted by </p>
+<h4><%= @event.creator.email %></h4>
+
+<h3>Attendees:</h3>
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li><%= attendee.email %></li> <li><%= attendee.id %></li>
+  <% end %>
+</ul>
+
+<div>
+  <%= link_to "Edit this event", edit_event_path(@event) %> |
+  <%= link_to "Back to events", events_path %>
+
+  <%= button_to "Destroy this event", @event, method: :delete %>
+</div>
+
+<% if @event.creator == current_user %>
+  <%= button_to "Invite", user_index_path, params: {:event_id => @event.id}, method: :get %>
+  <% else %>
+  <% if rsvp && rsvp.accepted? %>
+    <%= button_to "Cancel RSVP", rsvp_path(id: rsvp.id, event_id: @event.id, user_id: current_user.id), method: :delete %>
+  <% else %>
+  <%= button_to "RSVP", rsvp_path(event_id: @event.id), method: :post %>
+  <% end %>
+<% end %>

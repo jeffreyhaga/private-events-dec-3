@@ -1,0 +1,20 @@
+<nav>
+  <% if user_signed_in? %>
+    <ul>
+      <!-- Displayed when user is logged in -->
+      <li><%= link_to 'Create Event', new_event_path %></li>
+      <li><%= link_to 'View Events', events_path %></li>
+      <li><%= link_to "View Profile", current_user %></li>
+      <li><%= link_to 'Edit Profile', edit_user_registration_path %></li>
+      <li><%= button_to 'Logout', destroy_user_session_path, method: :delete %></li>
+      <!-- Display User Info -->
+      <li><%= current_user.email %></li>
+    </ul>
+  <% else %>
+    <ul>
+      <!-- Displayed when user is not logged in -->
+      <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+    </ul>
+  <% end %>
+</nav>

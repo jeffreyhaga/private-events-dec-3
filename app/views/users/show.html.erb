@@ -1,0 +1,23 @@
+<h1>👋Welcome to your profile <%= @user.email %> </h1>
+
+
+<h3>Total Attended Events:</h3>
+<ul>
+  <% @user.attended_events.each do |attended_events| %>
+    <li><%= attended_events.id %></li> 
+  <% end %>
+</ul>
+
+<h2>Upcoming Events</h2>
+<ul>
+  <% @future_events.each do |event| %>
+    <li><%= event.name %> - <%= event.date %></li>
+  <% end %>
+</ul>
+
+<h2>Past Events</h2>
+<ul>
+  <% @past_events.each do |event| %>
+    <li><%= event.name %> - <%= event.date %></li>
+  <% end %>
+</ul>
